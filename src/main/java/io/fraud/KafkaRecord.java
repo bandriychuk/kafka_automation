@@ -10,6 +10,7 @@ public class KafkaRecord {
         this.record = record;
     }
 
-
-
+    public boolean hasSourceId(String message){
+        return record.value().contains(message);
+    }
 }

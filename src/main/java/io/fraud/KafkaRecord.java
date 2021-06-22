@@ -1,16 +1,25 @@
 package io.fraud;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public class KafkaRecord {
 
     private final ConsumerRecord<String, String> record;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
 
     public KafkaRecord(ConsumerRecord<String, String> record) {
         this.record = record;
     }
 
-    public boolean hasSourceId(String message){
+    public boolean hasSourceId(String message) {
         return record.value().contains(message);
+    }
+
+    @SneakyThrows
+    public <T> T valueAs(Class<T> tClass) {
+        return objectMapper.readValue(record.value(), tClass);
     }
 }

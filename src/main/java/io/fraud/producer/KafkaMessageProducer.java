@@ -16,6 +16,7 @@ public class KafkaMessageProducer {
 
     public KafkaMessageProducer(String bootStrapServer) {
         this.bootStrapServer = bootStrapServer;
+        createProducer();
     }
 
     public KafkaMessageProducer createProducer() {
